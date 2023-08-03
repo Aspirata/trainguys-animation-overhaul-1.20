@@ -1,5 +1,6 @@
 package com.trainguy9512.animationoverhaul.mixin;
 
+import com.mojang.blaze3d.vertex.PoseStack;
 import com.trainguy9512.animationoverhaul.access.LivingEntityAccess;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.InventoryScreen;
@@ -12,17 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(InventoryScreen.class)
 public class MixinInventoryScreen {
-    public MixinInventoryScreen() {
-    }
-
-    @Inject(
-            method = {"renderEntityInInventory"},
-            at = {@At(
-                    value = "INVOKE",
-                    target = "Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;setRenderShadow(Z)V"
-            )}
-    )
-     private static void setRendererToEntity(GuiGraphics guiGraphics, int i, int j, int k, Quaternionf quaternionf, Quaternionf quaternionf2, LivingEntity livingEntity, CallbackInfo ci){
+    @Inject(method = "renderEntityInInventory", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/entity/EntityRenderDispatcher;setRenderShadow(Z)V"))
+    private static void setRendererToEntity(GuiGraphics guiGraphics, int i, int j, int k, Quaternionf quaternionf, Quaternionf quaternionf2, LivingEntity livingEntity, CallbackInfo ci){
         ((LivingEntityAccess)livingEntity).setUseInventoryRenderer(true);
     }
 }

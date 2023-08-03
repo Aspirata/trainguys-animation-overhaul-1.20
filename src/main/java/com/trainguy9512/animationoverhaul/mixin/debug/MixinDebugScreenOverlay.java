@@ -120,6 +120,7 @@ public abstract class MixinDebugScreenOverlay{
                 guiGraphics.fill( l - 1, m - 1, l + k + 1, m + j - 1, -1873784752);
                 guiGraphics.drawCenteredString(this.font,string, l, m, COLOR_GREY);
 
+
             } else {
                 String string = "Animation timers not initiated!";
                 Objects.requireNonNull(this.font);
